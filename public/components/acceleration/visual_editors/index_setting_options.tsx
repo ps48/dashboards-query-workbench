@@ -4,7 +4,7 @@
  */
 
 import React, { useState, ChangeEvent } from 'react';
-import { CreateAccelerationForm } from '../../../../../common/types';
+import { CreateAccelerationForm } from '../../../../common/types';
 import {
   EuiFieldNumber,
   EuiFieldText,

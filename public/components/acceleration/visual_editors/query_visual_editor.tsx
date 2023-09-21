@@ -4,10 +4,12 @@
  */
 
 import React from 'react';
-import { CreateAccelerationForm } from '../../../../../common/types';
+import { EuiSpacer } from '@elastic/eui';
+import { CreateAccelerationForm } from '../../../../common/types';
 import { IndexSettingOptions } from './index_setting_options';
 import { SkippingIndexBuilder } from './skipping_index/skipping_index_builder';
-import { EuiSpacer } from '@elastic/eui';
+import { CoveringIndexBuilder } from './covering_index/covering_index_builder';
+import { MaterializedViewBuilder } from './materialized_view/materialized_view_builder';
 
 interface QueryVisualEditorProps {
   accelerationFormData: CreateAccelerationForm;
@@ -27,6 +29,18 @@ export const QueryVisualEditor = ({
       <EuiSpacer size="l" />
       {accelerationFormData.accelerationIndexType === 'skipping' && (
         <SkippingIndexBuilder
+          accelerationFormData={accelerationFormData}
+          setAccelerationFormData={setAccelerationFormData}
+        />
+      )}
+      {accelerationFormData.accelerationIndexType === 'covering' && (
+        <CoveringIndexBuilder
+          accelerationFormData={accelerationFormData}
+          setAccelerationFormData={setAccelerationFormData}
+        />
+      )}
+      {accelerationFormData.accelerationIndexType === 'materialized' && (
+        <MaterializedViewBuilder
           accelerationFormData={accelerationFormData}
           setAccelerationFormData={setAccelerationFormData}
         />

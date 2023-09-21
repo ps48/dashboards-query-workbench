@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { EuiComboBox, EuiFormRow, EuiSpacer, EuiText } from '@elastic/eui';
+import { EuiComboBox, EuiFormRow, EuiSpacer, EuiText, htmlIdGenerator } from '@elastic/eui';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { CreateAccelerationForm } from '../../../../common/types';
@@ -38,15 +38,39 @@ export const AccelerationDataSourceSelector = ({
   }, []);
 
   useEffect(() => {
-    setTables([
-      {
-        label: 'Table1',
-      },
-      {
-        label: 'Table2',
-      },
-    ]);
-  }, [dataConnections]);
+    if (accelerationFormData.dataSource !== '') {
+      setTables([
+        {
+          label: 'Table1',
+        },
+        {
+          label: 'Table2',
+        },
+      ]);
+    }
+  }, [accelerationFormData.dataSource]);
+
+  useEffect(() => {
+    if (accelerationFormData.dataTable !== '') {
+      const idPrefix = htmlIdGenerator()();
+      setAccelerationFormData({
+        ...accelerationFormData,
+        dataTableFields: [
+          { id: `${idPrefix}1`, fieldName: 'Field 1', dataType: 'Integer' },
+          { id: `${idPrefix}2`, fieldName: 'Field 2', dataType: 'Integer' },
+          { id: `${idPrefix}3`, fieldName: 'Field 3', dataType: 'Integer' },
+          { id: `${idPrefix}4`, fieldName: 'Field 4', dataType: 'Integer' },
+          { id: `${idPrefix}5`, fieldName: 'Field 5', dataType: 'Integer' },
+          { id: `${idPrefix}6`, fieldName: 'Field 6', dataType: 'Integer' },
+          { id: `${idPrefix}7`, fieldName: 'Field 7', dataType: 'Integer' },
+          { id: `${idPrefix}8`, fieldName: 'Field 8', dataType: 'Integer' },
+          { id: `${idPrefix}9`, fieldName: 'Field 9', dataType: 'Integer' },
+          { id: `${idPrefix}10`, fieldName: 'Field 10', dataType: 'Integer' },
+          { id: `${idPrefix}11`, fieldName: 'Field 11', dataType: 'Integer' },
+        ],
+      });
+    }
+  }, [accelerationFormData.dataTable]);
 
   return (
     <>

@@ -60,12 +60,11 @@ export class SQLPage extends React.Component<SQLPageProps, SQLPageState> {
     });
   }
 
-  setIsFlyoutVisible(visible: boolean): void {
-    console.log('flyout funciton called: ', visible);
+  setIsFlyoutVisible = (visible: boolean): void => {
     this.setState({
       isFlyoutVisible: visible,
     });
-  }
+  };
 
   render() {
     let flyout;

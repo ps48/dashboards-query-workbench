@@ -22,7 +22,9 @@ export const IndexTypeSelector = ({
   accelerationFormData,
   setAccelerationFormData,
 }: IndexTypeSelectorProps) => {
-  const [selectedIndexType, setSelectedIndexType] = useState<Indextypes[]>([]);
+  const [selectedIndexType, setSelectedIndexType] = useState<Indextypes[]>([
+    ACCELERATION_INDEX_TYPES[0],
+  ]);
   return (
     <>
       <EuiText data-test-subj="index-type-selector-header">

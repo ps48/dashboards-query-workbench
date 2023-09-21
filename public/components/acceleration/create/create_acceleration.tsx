@@ -19,11 +19,11 @@ import { CreateAccelerationHeader } from './create_acceleration_header';
 import { CautionBannerCallout } from './caution_banner_callout';
 import { AccelerationDataSourceSelector } from '../selectors/source_selector';
 import { IndexTypeSelector } from '../selectors/index_type_selector';
-import { ToggleEditors } from '../query_editors/toggle_editors';
 import { CreateAccelerationForm } from '../../../../common/types/';
-import { QueryVisualEditor } from '../query_editors/visual_editors/query_visual_editor';
+import { QueryVisualEditor } from '../visual_editors/query_visual_editor';
+import { accelerationQueryBuilder } from '../visual_editors/query_builder';
 
-interface CreateAccelerationProps {
+export interface CreateAccelerationProps {
   dataSource: string;
   setIsFlyoutVisible(visible: boolean): void;
   updateQueries: (query: string) => void;
@@ -37,9 +37,12 @@ export const CreateAcceleration = ({
   const [accelerationFormData, setAccelerationFormData] = useState<CreateAccelerationForm>({
     dataSource: '',
     dataTable: '',
+    dataTableFields: [],
     accelerationIndexType: 'skipping',
     queryBuilderType: 'visual',
-    codeQuery: '',
+    skippingIndexQueryData: [],
+    coveringIndexQueryData: '',
+    materializedViewQueryData: '',
     accelerationIndexName: '',
     accelerationIndexAlias: '',
     primaryShardsCount: 5,
@@ -49,7 +52,7 @@ export const CreateAcceleration = ({
   });
 
   const copyToEditor = () => {
-    updateQueries('');
+    updateQueries(accelerationQueryBuilder(accelerationFormData));
   };
 
   return (

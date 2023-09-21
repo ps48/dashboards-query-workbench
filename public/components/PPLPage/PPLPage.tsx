@@ -22,7 +22,6 @@ import {
 } from '@elastic/eui';
 import { ResponseDetail, TranslateResult } from '../Main/main';
 import _ from 'lodash';
-import { CreateAcceleration } from '../acceleration/create/create_acceleration';
 
 interface PPLPageProps {
   onRun: (query: string) => void;
@@ -56,14 +55,6 @@ export class PPLPage extends React.Component<PPLPageProps, PPLPageState> {
   }
 
   render() {
-    const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
-
-    let flyout;
-
-    if (isFlyoutVisible) {
-      flyout = <CreateAcceleration dataSource="sample_ds" />;
-    }
-
     const closeModal = () => this.setIsModalVisible(false);
     const showModal = () => this.setIsModalVisible(true);
 
