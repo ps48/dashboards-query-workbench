@@ -12,3 +12,11 @@ export const ACCELERATION_INDEX_TYPES = [
   { label: 'Covering Index', value: 'covering' },
   { label: 'Materialized View', value: 'materialized' },
 ];
+
+export const ACCELERATION_AGGREGRATION_FUNCTIONS = [
+  { label: 'count', value: 'count' },
+  { label: 'sum', value: 'sum' },
+  { label: 'avg', value: 'avg' },
+  { label: 'max', value: 'max' },
+  { label: 'min', value: 'min' },
+];

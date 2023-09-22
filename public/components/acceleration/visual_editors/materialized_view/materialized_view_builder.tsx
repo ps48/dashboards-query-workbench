@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { CreateAccelerationForm } from '../../../../../common/types';
+import { CreateAccelerationForm, MaterializedViewColumn } from '../../../../../common/types';
 import {
   EuiSpacer,
   EuiText,
@@ -30,6 +30,10 @@ export const MaterializedViewBuilder = ({
   setAccelerationFormData,
 }: MaterializedViewBuilderProps) => {
   const [isColumnPopOverOpen, setIsColumnPopOverOpen] = useState(false);
+  const [columnExpressionValues, setColumnExpressionValues] = useState<MaterializedViewColumn[]>(
+    []
+  );
+
   return (
     <>
       <EuiText data-test-subj="covering-index-builder">
@@ -45,6 +49,9 @@ export const MaterializedViewBuilder = ({
           <AddColumnPopOver
             isColumnPopOverOpen={isColumnPopOverOpen}
             setIsColumnPopOverOpen={setIsColumnPopOverOpen}
+            columnExpressionValues={columnExpressionValues}
+            setColumnExpressionValues={setColumnExpressionValues}
+            accelerationFormData={accelerationFormData}
           />
         </EuiFlexItem>
       </EuiFlexGroup>
