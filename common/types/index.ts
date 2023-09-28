@@ -23,19 +23,26 @@ export interface DataTableFieldsType {
   dataType: string;
 }
 
+export interface RefreshIntervalType {
+  refreshWindow: number;
+  refreshInterval: string;
+}
+
+export type AccelerationIndexType = 'skipping' | 'covering' | 'materialized';
+
 export interface CreateAccelerationForm {
   dataSource: string;
+  database: string;
   dataTable: string;
   dataTableFields: DataTableFieldsType[];
-  accelerationIndexType: 'skipping' | 'covering' | 'materialized';
+  accelerationIndexType: AccelerationIndexType;
   queryBuilderType: 'visual' | 'code';
   skippingIndexQueryData: SkippingIndexRowType[];
   coveringIndexQueryData: string;
   materializedViewQueryData: string;
   accelerationIndexName: string;
-  accelerationIndexAlias: string;
   primaryShardsCount: number;
   replicaShardsCount: number;
   refreshType: 'interval' | 'auto';
-  refreshIntervalSeconds: string | undefined;
+  refreshIntervalOptions: RefreshIntervalType | undefined;
 }

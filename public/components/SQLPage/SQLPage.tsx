@@ -72,7 +72,7 @@ export class SQLPage extends React.Component<SQLPageProps, SQLPageState> {
     if (this.state.isFlyoutVisible) {
       flyout = (
         <CreateAcceleration
-          dataSource="ds"
+          dataSource={'spark1'} // TODO: Hardcoded for now, will be removed
           setIsFlyoutVisible={this.setIsFlyoutVisible}
           updateQueries={this.props.updateSQLQueries}
         />

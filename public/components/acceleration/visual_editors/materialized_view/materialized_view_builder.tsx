@@ -5,20 +5,19 @@
 
 import React, { useState } from 'react';
 import { CreateAccelerationForm, MaterializedViewColumn } from '../../../../../common/types';
+import _ from 'lodash';
 import {
   EuiSpacer,
   EuiText,
   EuiExpression,
-  EuiButton,
-  EuiCode,
-  EuiPopover,
-  EuiPopoverFooter,
-  EuiPopoverTitle,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiButtonEmpty,
+  htmlIdGenerator,
 } from '@elastic/eui';
 import { AddColumnPopOver } from './add_column_popover';
+import { ColumnExpression } from './column_expression';
+import { GroupByTumbleExpression } from './group_by_tumble_expression';
+import { useEffect } from 'react';
 
 interface MaterializedViewBuilderProps {
   accelerationFormData: CreateAccelerationForm;
@@ -34,13 +33,29 @@ export const MaterializedViewBuilder = ({
     []
   );
 
+  useEffect(() => {
+    if (accelerationFormData.dataTableFields.length > 0) {
+      setColumnExpressionValues([
+        {
+          id: htmlIdGenerator()(),
+          functionName: 'count',
+          functionParam: accelerationFormData.dataTableFields[0].fieldName,
+          fieldAlias: 'counter1',
+        },
+      ]);
+    }
+  }, [accelerationFormData.dataTableFields]);
+
   return (
     <>
       <EuiText data-test-subj="covering-index-builder">
         <h3>Materialized view definition</h3>
       </EuiText>
       <EuiSpacer size="s" />
-      <EuiExpression description="CREATE MATERIALIZED VIEW" value={'index-1'} />
+      <EuiExpression
+        description="CREATE MATERIALIZED VIEW"
+        value={accelerationFormData.accelerationIndexName}
+      />
       <EuiFlexGroup>
         <EuiFlexItem grow={false}>
           <EuiExpression description="AS SELECT" value="" />
@@ -55,7 +70,26 @@ export const MaterializedViewBuilder = ({
           />
         </EuiFlexItem>
       </EuiFlexGroup>
-      <EuiExpression description="FROM" value={'table-1'} />
+      <EuiFlexGroup direction="column" gutterSize="s">
+        {_.map(columnExpressionValues, (_, i) => {
+          return (
+            <ColumnExpression
+              index={i}
+              currentColumnExpressionValue={columnExpressionValues[i]}
+              columnExpressionValues={columnExpressionValues}
+              setColumnExpressionValues={setColumnExpressionValues}
+              accelerationFormData={accelerationFormData}
+            />
+          );
+        })}
+      </EuiFlexGroup>
+      <EuiSpacer size="s" />
+      <EuiExpression color="accent" description="FROM" value={accelerationFormData.dataTable} />
+      <EuiSpacer size="s" />
+      <GroupByTumbleExpression
+        accelerationFormData={accelerationFormData}
+        setAccelerationFormData={setAccelerationFormData}
+      />
     </>
   );
 };
