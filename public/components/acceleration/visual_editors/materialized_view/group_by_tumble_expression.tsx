@@ -67,6 +67,7 @@ export const GroupByTumbleExpression = ({
             }${isTimePlural(groupbyValues.tumbleWindow)}')`}
             isActive={IsGroupPopOverOpen}
             onClick={() => setIsGroupPopOverOpen(true)}
+            isInvalid={groupbyValues.timeField === ''}
           />
         }
         isOpen={IsGroupPopOverOpen}

@@ -15,11 +15,11 @@ export const ACCELERATION_INDEX_TYPES = [
 ];
 
 export const ACCELERATION_AGGREGRATION_FUNCTIONS = [
-  { label: 'count', value: 'count' },
-  { label: 'sum', value: 'sum' },
-  { label: 'avg', value: 'avg' },
-  { label: 'max', value: 'max' },
-  { label: 'min', value: 'min' },
+  { label: 'count' },
+  { label: 'sum' },
+  { label: 'avg' },
+  { label: 'max' },
+  { label: 'min' },
 ];
 
 export const ACCELERATION_TIME_INTERVAL = [
@@ -29,3 +29,5 @@ export const ACCELERATION_TIME_INTERVAL = [
   { text: 'day(s)', value: 'day' },
   { text: 'week(s)', value: 'week' },
 ];
+
+export const ACCELERATION_ADD_FIELDS_TEXT = '(add fields here)';

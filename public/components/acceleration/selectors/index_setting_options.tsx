@@ -7,6 +7,7 @@ import React, { useState, ChangeEvent } from 'react';
 import { CreateAccelerationForm } from '../../../../common/types';
 import {
   EuiFieldNumber,
+  EuiFieldText,
   EuiFormRow,
   EuiRadioGroup,
   EuiSelect,
@@ -43,6 +44,7 @@ export const IndexSettingOptions = ({
   const [refreshTypeSelected, setRefreshTypeSelected] = useState(autoRefreshId);
   const [refreshWindow, setRefreshWindow] = useState(1);
   const [refreshInterval, setRefreshInterval] = useState(ACCELERATION_TIME_INTERVAL[1].value);
+  const [checkpoint, setCheckpoint] = useState('');
 
   const onChangePrimaryShards = (e: ChangeEvent<HTMLInputElement>) => {
     const countPrimaryShards = +e.target.value;
@@ -86,6 +88,12 @@ export const IndexSettingOptions = ({
       },
     });
     setRefreshInterval(refreshIntervalValue);
+  };
+
+  const onChangeCheckpoint = (e: ChangeEvent<HTMLInputElement>) => {
+    const checkpointLocation = e.target.value;
+    setAccelerationFormData({ ...accelerationFormData, checkpointLocation: checkpointLocation });
+    setCheckpoint(checkpointLocation);
   };
 
   return (
@@ -158,6 +166,25 @@ export const IndexSettingOptions = ({
           />
         </EuiFormRow>
       )}
+
+      <EuiFormRow
+        label={
+          accelerationFormData.accelerationIndexType === 'materialized'
+            ? 'Checkpoint location'
+            : 'Checkpoint location - optional'
+        }
+        helpText="The HDFS compatible file system location path for incremental refresh job checkpoint. Applicable when auto refresh is enabled."
+      >
+        <EuiFieldText
+          placeholder="s3://checkpoint/location"
+          value={checkpoint}
+          onChange={onChangeCheckpoint}
+          aria-label="Use aria labels when no actual label is in use"
+          isInvalid={
+            accelerationFormData.accelerationIndexType === 'materialized' && checkpoint === ''
+          }
+        />
+      </EuiFormRow>
     </>
   );
 };

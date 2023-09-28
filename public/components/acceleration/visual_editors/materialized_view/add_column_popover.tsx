@@ -19,7 +19,11 @@ import {
   EuiSpacer,
 } from '@elastic/eui';
 
-import { CreateAccelerationForm, MaterializedViewColumn } from '../../../../../common/types';
+import {
+  AggregationNameType,
+  CreateAccelerationForm,
+  MaterializedViewColumn,
+} from '../../../../../common/types';
 import { ACCELERATION_AGGREGRATION_FUNCTIONS } from '../../../../../common/constants';
 import { useEffect } from 'react';
 import _ from 'lodash';
@@ -48,7 +52,7 @@ export const AddColumnPopOver = ({
   const resetSelectedField = () => {
     if (accelerationFormData.dataTableFields.length > 0) {
       const defaultFieldName = accelerationFormData.dataTableFields[0].fieldName;
-      setSelectedField([{ label: defaultFieldName, value: defaultFieldName }]);
+      setSelectedField([{ label: defaultFieldName }]);
     }
   };
   const resetValues = () => {
@@ -69,6 +73,14 @@ export const AddColumnPopOver = ({
     resetSelectedField();
   }, []);
 
+  const loadAggregationFields = () => {
+    let aggFields = _.map(accelerationFormData.dataTableFields, (x) => {
+      return { label: x.fieldName };
+    });
+    if (selectedField.length > 0 && selectedField[0].label === 'count')
+      aggFields = [{ label: '*' }, ...aggFields];
+    return aggFields;
+  };
   return (
     <EuiPopover
       panelPaddingSize="s"
@@ -105,9 +117,7 @@ export const AddColumnPopOver = ({
             <EuiFormRow label="Aggregation field">
               <EuiComboBox
                 singleSelection={{ asPlainText: true }}
-                options={_.map(accelerationFormData.dataTableFields, (x) => {
-                  return { label: x.fieldName, value: x.fieldName };
-                })}
+                options={loadAggregationFields()}
                 selectedOptions={selectedField}
                 onChange={setSelectedField}
               />
@@ -129,8 +139,8 @@ export const AddColumnPopOver = ({
               ...columnExpressionValues,
               {
                 id: newId,
-                functionName: selectedFunction[0].value,
-                functionParam: selectedField[0].value,
+                functionName: selectedFunction[0].label as AggregationNameType,
+                functionParam: selectedField[0].label,
                 fieldAlias: selectedAlias,
               },
             ]);

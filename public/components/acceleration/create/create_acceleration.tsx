@@ -49,6 +49,7 @@ export const CreateAcceleration = ({
     primaryShardsCount: 5,
     replicaShardsCount: 1,
     refreshType: 'auto',
+    checkpointLocation: undefined,
     refreshIntervalOptions: undefined,
   });
 

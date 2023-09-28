@@ -10,10 +10,13 @@ import {
   EuiPopoverTitle,
   EuiSpacer,
   EuiText,
+  EuiFlexItem,
+  EuiFlexGroup,
 } from '@elastic/eui';
 import React, { useEffect, useState } from 'react';
 import { CreateAccelerationForm } from '../../../../../common/types';
 import _ from 'lodash';
+import { ACCELERATION_ADD_FIELDS_TEXT } from '../../../../../common/constants';
 
 interface CoveringIndexBuilderProps {
   accelerationFormData: CreateAccelerationForm;
@@ -33,7 +36,7 @@ export const CoveringIndexBuilder = ({
   };
 
   useEffect(() => {
-    let expresseionValue = '(add columns here)';
+    let expresseionValue = ACCELERATION_ADD_FIELDS_TEXT;
     if (selectedOptions.length > 0) {
       expresseionValue =
         '(' +
@@ -57,38 +60,51 @@ export const CoveringIndexBuilder = ({
         <h3>Covering index definition</h3>
       </EuiText>
       <EuiSpacer size="s" />
-      <EuiExpression
-        description="CREATE INDEX"
-        value={accelerationFormData.accelerationIndexName}
-      />
-      <EuiExpression description="ON" value={accelerationFormData.dataTable} />
-      <EuiPopover
-        id="popover1"
-        button={
+      <EuiFlexGroup direction="column" gutterSize="xs">
+        <EuiFlexItem grow={false}>
           <EuiExpression
-            description=""
-            value={columnsValue}
-            isActive={isPopOverOpen}
-            onClick={() => setIsPopOverOpen(true)}
+            description="CREATE INDEX"
+            value={accelerationFormData.accelerationIndexName}
           />
-        }
-        isOpen={isPopOverOpen}
-        closePopover={() => setIsPopOverOpen(false)}
-        panelPaddingSize="s"
-        anchorPosition="downLeft"
-      >
-        <>
-          <EuiPopoverTitle paddingSize="l">Columns</EuiPopoverTitle>
-          <EuiComboBox
-            placeholder="Select one or more options"
-            options={accelerationFormData.dataTableFields.map((x) => {
-              return { label: x.fieldName };
-            })}
-            selectedOptions={selectedOptions}
-            onChange={onChange}
+        </EuiFlexItem>
+        <EuiFlexItem grow={false}>
+          <EuiExpression description="[IF NOT EXISTS]" />
+        </EuiFlexItem>
+        <EuiFlexItem>
+          <EuiExpression
+            description="ON"
+            value={`${accelerationFormData.dataSource}.${accelerationFormData.database}.${accelerationFormData.dataTable}`}
           />
-        </>
-      </EuiPopover>
+          <EuiPopover
+            id="popover1"
+            button={
+              <EuiExpression
+                description=""
+                value={columnsValue}
+                isActive={isPopOverOpen}
+                onClick={() => setIsPopOverOpen(true)}
+                isInvalid={columnsValue === ACCELERATION_ADD_FIELDS_TEXT}
+              />
+            }
+            isOpen={isPopOverOpen}
+            closePopover={() => setIsPopOverOpen(false)}
+            panelPaddingSize="s"
+            anchorPosition="downLeft"
+          >
+            <>
+              <EuiPopoverTitle paddingSize="l">Columns</EuiPopoverTitle>
+              <EuiComboBox
+                placeholder="Select one or more options"
+                options={accelerationFormData.dataTableFields.map((x) => {
+                  return { label: x.fieldName };
+                })}
+                selectedOptions={selectedOptions}
+                onChange={onChange}
+              />
+            </>
+          </EuiPopover>
+        </EuiFlexItem>
+      </EuiFlexGroup>
     </>
   );
 };

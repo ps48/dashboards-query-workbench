@@ -3,9 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+export type AggregationNameType = 'skipping' | 'covering' | 'materialized';
+
 export interface MaterializedViewColumn {
   id: string;
-  functionName: 'count' | 'sum' | 'avg' | 'min' | 'max';
+  functionName: AggregationNameType;
   functionParam: string;
   fieldAlias?: string;
 }
@@ -44,5 +46,6 @@ export interface CreateAccelerationForm {
   primaryShardsCount: number;
   replicaShardsCount: number;
   refreshType: 'interval' | 'auto';
+  checkpointLocation: string | undefined;
   refreshIntervalOptions: RefreshIntervalType | undefined;
 }
