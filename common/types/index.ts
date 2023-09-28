@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type AggregationNameType = 'skipping' | 'covering' | 'materialized';
+export type AggregationFunctionType = 'count' | 'sum' | 'avg' | 'max' | 'min';
 
 export interface MaterializedViewColumn {
   id: string;
-  functionName: AggregationNameType;
+  functionName: AggregationFunctionType;
   functionParam: string;
   fieldAlias?: string;
 }
@@ -32,16 +32,26 @@ export interface RefreshIntervalType {
 
 export type AccelerationIndexType = 'skipping' | 'covering' | 'materialized';
 
+export interface GroupByTumbleType {
+  timeField: string;
+  tumbleWindow: number;
+  tumbleInterval: string;
+}
+
+export interface materializedViewQueryType {
+  ColumnsValues: MaterializedViewColumn[];
+  GroupByTumbleValue: GroupByTumbleType;
+}
+
 export interface CreateAccelerationForm {
   dataSource: string;
   database: string;
   dataTable: string;
   dataTableFields: DataTableFieldsType[];
   accelerationIndexType: AccelerationIndexType;
-  queryBuilderType: 'visual' | 'code';
   skippingIndexQueryData: SkippingIndexRowType[];
   coveringIndexQueryData: string;
-  materializedViewQueryData: string;
+  materializedViewQueryData: materializedViewQueryType;
   accelerationIndexName: string;
   primaryShardsCount: number;
   replicaShardsCount: number;

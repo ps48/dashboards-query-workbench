@@ -5,19 +5,45 @@
 
 import _ from 'lodash';
 import { CreateAccelerationForm, SkippingIndexRowType } from '../../../../common/types';
+import { isTimePlural } from '../create/utils';
 
-const buildSkippingIndexColumns = (skippingIndexQueryData: SkippingIndexRowType[]) => {
-  return _.reduce(
-    skippingIndexQueryData,
-    function (columns, n, index) {
-      const columnValue = columns + `   ${n.fieldName} ${n.accelerationMethod}`;
-      if (index !== skippingIndexQueryData.length - 1) return `${columnValue}, \n`;
-      else return `${columnValue} \n`;
-    },
-    ''
+/* Add index options to query */
+const buildIndexOptions = (accelerationformData: CreateAccelerationForm) => {
+  const indexOptions: string[] = [];
+
+  // Add index settings option
+  indexOptions.push(
+    `index_settings = '{"number_of_shards":${accelerationformData.primaryShardsCount},"number_of_replicas":${accelerationformData.replicaShardsCount}}'`
   );
+
+  // Add auto refresh option
+  indexOptions.push(`auto_refresh = ${accelerationformData.refreshType === 'auto'}`);
+
+  // Add refresh interval option
+  if (accelerationformData.refreshType === 'interval') {
+    const { refreshWindow, refreshInterval } = accelerationformData.refreshIntervalOptions;
+    indexOptions.push(
+      `refresh_interval = '${refreshWindow} ${refreshInterval}${isTimePlural(refreshWindow)}'`
+    );
+  }
+
+  // Add checkpoint location option
+  if (accelerationformData.checkpointLocation) {
+    indexOptions.push(`checkpoint_location = '${accelerationformData.checkpointLocation}'`);
+  }
+
+  // Combine all options with commas and return as a single string
+  return `WITH (\n${indexOptions.join(',\n')}\n)`;
 };
 
+/* Add skipping index columns to query */
+const buildSkippingIndexColumns = (skippingIndexQueryData: SkippingIndexRowType[]) => {
+  return skippingIndexQueryData
+    .map((n) => `   ${n.fieldName} ${n.accelerationMethod}`)
+    .join(', \n');
+};
+
+/* Builds create skipping index query */
 const skippingIndexQueryBuilder = (accelerationformData: CreateAccelerationForm) => {
   /*
    * Skipping Index Example
@@ -27,14 +53,22 @@ const skippingIndexQueryBuilder = (accelerationformData: CreateAccelerationForm)
    *    field1 VALUE_SET,
    *    field2 PARTITION,
    *    field3 MIN_MAX,
+   * ) WITH (
+   * auto_refresh = true,
+   * refresh_interval = '1 minute',
+   * checkpoint_location = 's3://test/',
+   * index_settings = '{"number_of_shards":9,"number_of_replicas":2}'
    * )
    */
-  console.log('index builder started');
-  let codeQuery = 'CREATE SKIPPING INDEX ON ' + accelerationformData.dataTable;
-  codeQuery = codeQuery + '\n FOR COLUMNS ( \n';
-  codeQuery = codeQuery + buildSkippingIndexColumns(accelerationformData.skippingIndexQueryData);
-  codeQuery = codeQuery + ')';
-  console.log('index builder finished', codeQuery);
+  const { dataSource, database, dataTable, skippingIndexQueryData } = accelerationformData;
+
+  const codeQuery = `CREATE SKIPPING INDEX
+[IF NOT EXISTS]
+ON ${dataSource}.${database}.${dataTable}
+FOR COLUMNS (
+  ${buildSkippingIndexColumns(skippingIndexQueryData)}
+  ) ${buildIndexOptions(accelerationformData)}`;
+
   return codeQuery;
 };
 
@@ -47,7 +81,6 @@ const materializedQueryViewBuilder = (accelerationformData: CreateAccelerationFo
 };
 
 export const accelerationQueryBuilder = (accelerationformData: CreateAccelerationForm) => {
-  console.log('accelerationQueryBuilder started', accelerationformData);
   switch (accelerationformData.accelerationIndexType) {
     case 'skipping': {
       return skippingIndexQueryBuilder(accelerationformData);

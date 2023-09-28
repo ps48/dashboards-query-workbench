@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   EuiComboBox,
   EuiExpression,
@@ -16,15 +16,9 @@ import {
   EuiComboBoxOptionOption,
 } from '@elastic/eui';
 import { ACCELERATION_TIME_INTERVAL } from '../../../../../common/constants';
-import { CreateAccelerationForm } from '../../../../../common/types';
+import { CreateAccelerationForm, GroupByTumbleType } from '../../../../../common/types';
 import _ from 'lodash';
 import { isTimePlural } from '../../create/utils';
-
-interface GroupByTumbleValues {
-  timeField: string;
-  tumbleWindow: number;
-  tumbleInterval: string;
-}
 
 interface GroupByTumbleExpressionProps {
   accelerationFormData: CreateAccelerationForm;
@@ -36,7 +30,7 @@ export const GroupByTumbleExpression = ({
   setAccelerationFormData,
 }: GroupByTumbleExpressionProps) => {
   const [IsGroupPopOverOpen, setIsGroupPopOverOpen] = useState(false);
-  const [groupbyValues, setGroupByValues] = useState<GroupByTumbleValues>({
+  const [groupbyValues, setGroupByValues] = useState<GroupByTumbleType>({
     timeField: '',
     tumbleWindow: 1,
     tumbleInterval: ACCELERATION_TIME_INTERVAL[0].text,
@@ -54,6 +48,16 @@ export const GroupByTumbleExpression = ({
     if (selectedOptions.length > 0)
       setGroupByValues({ ...groupbyValues, timeField: selectedOptions[0].label });
   };
+
+  useEffect(() => {
+    setAccelerationFormData({
+      ...accelerationFormData,
+      materializedViewQueryData: {
+        ...accelerationFormData.materializedViewQueryData,
+        GroupByTumbleValue: groupbyValues,
+      },
+    });
+  }, [groupbyValues]);
 
   return (
     <EuiFlexItem grow={false}>

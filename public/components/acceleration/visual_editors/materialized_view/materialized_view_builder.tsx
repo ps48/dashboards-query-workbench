@@ -46,6 +46,16 @@ export const MaterializedViewBuilder = ({
     }
   }, [accelerationFormData.dataTableFields]);
 
+  useEffect(() => {
+    setAccelerationFormData({
+      ...accelerationFormData,
+      materializedViewQueryData: {
+        ...accelerationFormData.materializedViewQueryData,
+        ColumnsValues: columnExpressionValues,
+      },
+    });
+  }, [columnExpressionValues]);
+
   return (
     <>
       <EuiText data-test-subj="covering-index-builder">

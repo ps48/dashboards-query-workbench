@@ -20,7 +20,7 @@ import {
 } from '@elastic/eui';
 
 import {
-  AggregationNameType,
+  AggregationFunctionType,
   CreateAccelerationForm,
   MaterializedViewColumn,
 } from '../../../../../common/types';
@@ -55,6 +55,7 @@ export const AddColumnPopOver = ({
       setSelectedField([{ label: defaultFieldName }]);
     }
   };
+
   const resetValues = () => {
     setSelectedFunction([ACCELERATION_AGGREGRATION_FUNCTIONS[0]]);
     resetSelectedField();
@@ -73,14 +74,6 @@ export const AddColumnPopOver = ({
     resetSelectedField();
   }, []);
 
-  const loadAggregationFields = () => {
-    let aggFields = _.map(accelerationFormData.dataTableFields, (x) => {
-      return { label: x.fieldName };
-    });
-    if (selectedField.length > 0 && selectedField[0].label === 'count')
-      aggFields = [{ label: '*' }, ...aggFields];
-    return aggFields;
-  };
   return (
     <EuiPopover
       panelPaddingSize="s"
@@ -117,7 +110,12 @@ export const AddColumnPopOver = ({
             <EuiFormRow label="Aggregation field">
               <EuiComboBox
                 singleSelection={{ asPlainText: true }}
-                options={loadAggregationFields()}
+                options={[
+                  { label: '*', disabled: selectedFunction[0].label !== 'count' },
+                  ..._.map(accelerationFormData.dataTableFields, (x) => {
+                    return { label: x.fieldName };
+                  }),
+                ]}
                 selectedOptions={selectedField}
                 onChange={setSelectedField}
               />
@@ -139,7 +137,7 @@ export const AddColumnPopOver = ({
               ...columnExpressionValues,
               {
                 id: newId,
-                functionName: selectedFunction[0].label as AggregationNameType,
+                functionName: selectedFunction[0].label as AggregationFunctionType,
                 functionParam: selectedField[0].label,
                 fieldAlias: selectedAlias,
               },

@@ -12,6 +12,7 @@ import {
   EuiText,
   EuiFlexItem,
   EuiFlexGroup,
+  EuiComboBoxOptionOption,
 } from '@elastic/eui';
 import React, { useEffect, useState } from 'react';
 import { CreateAccelerationForm } from '../../../../../common/types';
@@ -31,7 +32,7 @@ export const CoveringIndexBuilder = ({
   const [columnsValue, setColumnsValue] = useState('');
   const [selectedOptions, setSelected] = useState([]);
 
-  const onChange = (selectedOptions) => {
+  const onChange = (selectedOptions: EuiComboBoxOptionOption[]) => {
     setSelected(selectedOptions);
   };
 
@@ -51,6 +52,7 @@ export const CoveringIndexBuilder = ({
         ) +
         ')';
     }
+    setAccelerationFormData({ ...accelerationFormData, coveringIndexQueryData: expresseionValue });
     setColumnsValue(expresseionValue);
   }, [selectedOptions]);
 

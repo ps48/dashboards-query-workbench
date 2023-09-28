@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { CreateAccelerationHeader } from './create_acceleration_header';
 import { CautionBannerCallout } from './caution_banner_callout';
 import { AccelerationDataSourceSelector } from '../selectors/source_selector';
-import { CreateAccelerationForm } from '../../../../common/types/';
+import { CreateAccelerationForm, materializedViewQueryType } from '../../../../common/types/';
 import { QueryVisualEditor } from '../visual_editors/query_visual_editor';
 import { accelerationQueryBuilder } from '../visual_editors/query_builder';
 import { IndexSettingOptions } from '../selectors/index_setting_options';
@@ -41,10 +41,9 @@ export const CreateAcceleration = ({
     database: '',
     dataTableFields: [],
     accelerationIndexType: 'skipping',
-    queryBuilderType: 'visual',
     skippingIndexQueryData: [],
     coveringIndexQueryData: '',
-    materializedViewQueryData: '',
+    materializedViewQueryData: {} as materializedViewQueryType,
     accelerationIndexName: '',
     primaryShardsCount: 5,
     replicaShardsCount: 1,

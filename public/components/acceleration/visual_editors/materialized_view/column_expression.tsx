@@ -5,7 +5,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { ACCELERATION_AGGREGRATION_FUNCTIONS } from '../../../../../common/constants';
-import { MaterializedViewColumn, CreateAccelerationForm } from '../../../../../common/types';
+import {
+  MaterializedViewColumn,
+  CreateAccelerationForm,
+  AggregationFunctionType,
+} from '../../../../../common/types';
 import _ from 'lodash';
 import {
   EuiButtonIcon,
@@ -51,12 +55,7 @@ export const ColumnExpression = ({
             button={
               <EuiExpression
                 description=""
-                value={
-                  currentColumnExpressionValue.functionName +
-                  '(' +
-                  currentColumnExpressionValue.functionParam +
-                  ')'
-                }
+                value={`${currentColumnExpressionValue.functionName}(${currentColumnExpressionValue.functionParam})`}
                 isActive={isFunctionPopOverOpen}
                 onClick={() => {
                   setIsAliasPopOverOpen(false);
@@ -79,14 +78,13 @@ export const ColumnExpression = ({
                       selectedOptions={[
                         {
                           label: currentColumnExpressionValue.functionName,
-                          value: currentColumnExpressionValue.functionName,
                         },
                       ]}
                       onChange={(functionOption) =>
                         updateColumnExpressionValue(
                           {
                             ...currentColumnExpressionValue,
-                            functionName: functionOption[0].value,
+                            functionName: functionOption[0].label as AggregationFunctionType,
                           },
                           index
                         )
@@ -98,18 +96,23 @@ export const ColumnExpression = ({
                   <EuiFormRow label="Aggregation field">
                     <EuiComboBox
                       singleSelection={{ asPlainText: true }}
-                      options={_.map(accelerationFormData.dataTableFields, (x) => {
-                        return { label: x.fieldName, value: x.fieldName };
-                      })}
+                      options={[
+                        {
+                          label: '*',
+                          disabled: currentColumnExpressionValue.functionName !== 'count',
+                        },
+                        ..._.map(accelerationFormData.dataTableFields, (x) => {
+                          return { label: x.fieldName };
+                        }),
+                      ]}
                       selectedOptions={[
                         {
                           label: currentColumnExpressionValue.functionParam,
-                          value: currentColumnExpressionValue.functionParam,
                         },
                       ]}
                       onChange={(fieldOption) =>
                         updateColumnExpressionValue(
-                          { ...currentColumnExpressionValue, functionParam: fieldOption[0].value },
+                          { ...currentColumnExpressionValue, functionParam: fieldOption[0].label },
                           index
                         )
                       }
@@ -160,14 +163,12 @@ export const ColumnExpression = ({
           <EuiButtonIcon
             color="danger"
             onClick={() => {
-              console.log('before', columnExpressionValues);
               setColumnExpressionValues([
                 ..._.filter(
                   columnExpressionValues,
                   (o) => o.id !== currentColumnExpressionValue.id
                 ),
               ]);
-              console.log('after', columnExpressionValues);
             }}
             iconType="trash"
             aria-label="delete-column-expression"
