@@ -35,33 +35,29 @@ export const DefineIndexOptions = ({
   setAccelerationFormData,
 }: DefineIndexOptionsProps) => {
   const [indexName, setIndexName] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalComponent, setModalComponent] = useState(<></>);
 
-  let modal;
-
-  if (isModalVisible) {
-    modal = (
-      <EuiModal maxWidth={850} onClose={() => setIsModalVisible(false)}>
-        <EuiModalHeader>
-          <EuiModalHeaderTitle>
-            <h1>Acceleration index naming</h1>
-          </EuiModalHeaderTitle>
-        </EuiModalHeader>
-        <EuiModalBody>
-          <EuiFlexGroup>
-            <EuiFlexItem grow={false}>
-              <EuiMarkdownFormat>{ACCELERATION_INDEX_NAME_INFO}</EuiMarkdownFormat>
-            </EuiFlexItem>
-          </EuiFlexGroup>
-        </EuiModalBody>
-        <EuiModalFooter>
-          <EuiButton onClick={() => setIsModalVisible(false)} fill>
-            Close
-          </EuiButton>
-        </EuiModalFooter>
-      </EuiModal>
-    );
-  }
+  const modalValue = (
+    <EuiModal maxWidth={850} onClose={() => setModalComponent(<></>)}>
+      <EuiModalHeader>
+        <EuiModalHeaderTitle>
+          <h1>Acceleration index naming</h1>
+        </EuiModalHeaderTitle>
+      </EuiModalHeader>
+      <EuiModalBody>
+        <EuiFlexGroup>
+          <EuiFlexItem grow={false}>
+            <EuiMarkdownFormat>{ACCELERATION_INDEX_NAME_INFO}</EuiMarkdownFormat>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </EuiModalBody>
+      <EuiModalFooter>
+        <EuiButton onClick={() => setModalComponent(<></>)} fill>
+          Close
+        </EuiButton>
+      </EuiModalFooter>
+    </EuiModal>
+  );
 
   const onChangeIndexName = (e: ChangeEvent<HTMLInputElement>) => {
     setAccelerationFormData({ ...accelerationFormData, accelerationIndexName: e.target.value });
@@ -102,7 +98,7 @@ export const DefineIndexOptions = ({
         Prefix and suffix are added to the name of generated OpenSearch index.'
         labelAppend={
           <EuiText size="xs">
-            <EuiLink onClick={() => setIsModalVisible(true)}>Help</EuiLink>
+            <EuiLink onClick={() => setModalComponent(modalValue)}>Help</EuiLink>
           </EuiText>
         }
       >
@@ -117,7 +113,7 @@ export const DefineIndexOptions = ({
           isInvalid={validateIndexName(indexName)}
         />
       </EuiFormRow>
-      {modal}
+      {modalComponent}
     </>
   );
 };

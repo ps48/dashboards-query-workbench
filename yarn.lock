@@ -98,28 +98,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@types/cheerio@*":
-  version "0.22.32"
-  resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.32.tgz#1a41608fd072544c3ed6c0d6cc3fcf08d07715de"
-  integrity sha512-4RrpCp5ufWTLb6/1RCOjazRhUM6DTD79l763det29n8kLmPB7XeN46cxlUf2GsSF+0g6CbWT5nYl8C/Gs15bdg==
-  dependencies:
-    "@types/node" "*"
-
-"@types/enzyme-adapter-react-16@^1.0.6":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.7.tgz#88e94608581c0a1a66f82b5c1ff641a09bcfa22b"
-  integrity sha512-BQLgUf3vbuzi37iCjhXNG/iBmCzuLxlIxhkafO8AJisXxRbGOfbuJi1Stwlwr5oj/6/Ea7mViKG7Wh54n0ULXw==
-  dependencies:
-    "@types/enzyme" "*"
-
-"@types/enzyme@*":
-  version "3.10.14"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.14.tgz#dc30e3820a6331e8165be442cc778f25457ec44d"
-  integrity sha512-JeTG2MNUX1bH2DqccwUe3SuPoLu+kUz5UgR3Tvl9nBdfNj7rBZscytctSjEatd5Ul9GXXGKaQBaxODIgJYVRqA==
-  dependencies:
-    "@types/cheerio" "*"
-    "@types/react" "^16"
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
@@ -148,20 +126,6 @@
   version "16.18.55"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.55.tgz#3d9ac633ed401238c13ccaeed54297bd653412a3"
   integrity sha512-Y1zz/LIuJek01+hlPNzzXQhmq/Z2BCP96j18MSXC0S0jSu/IG4FFxmBs7W4/lI2vPJ7foVfEB0hUVtnOjnCiTg==
-
-"@types/react-test-renderer@^16.9.1":
-  version "16.9.8"
-  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.8.tgz#42268fe29cb6519c2bfe057b047be7063aa93564"
-  integrity sha512-5zmgK3rWLQLX8VwcK94KqCnXTmirDFgsJOElNbnvNJ7v6QIg3SBqZgH/b5Z5VVQVCTiXc4ZzETF4H0yq3VwHCQ==
-  dependencies:
-    "@types/react" "^16"
-
-"@types/react@^16":
-  version "16.3.14"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.14.tgz#f90ac6834de172e13ecca430dcb6814744225d36"
-  integrity sha512-wNUGm49fPl7eE2fnYdF0v5vSOrUMdKMQD/4NwtQRnb6mnPwtkhabmuFz37eq90+hhyfz0pWd38jkZHOcaZ6LGw==
-  dependencies:
-    csstype "^2.2.0"
 
 "@types/sinonjs__fake-timers@8.1.1":
   version "8.1.1"
@@ -534,11 +498,6 @@ cross-spawn@^7.0.0:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
-
-csstype@^2.2.0:
-  version "2.6.20"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.20.tgz#9229c65ea0b260cf4d3d997cb06288e36a8d6dda"
-  integrity sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==
 
 cypress@^12.8.1:
   version "12.17.4"

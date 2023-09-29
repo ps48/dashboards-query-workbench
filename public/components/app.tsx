@@ -20,7 +20,6 @@ interface WorkbenchAppDeps {
   http: CoreStart['http'];
   navigation: NavigationPublicPluginStart;
   chrome: CoreStart['chrome'];
-  overlays: CoreStart['overlays'];
 }
 
 const onChange = () => {};

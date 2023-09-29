@@ -21,7 +21,6 @@ export const renderApp = (
       http={http}
       navigation={navigation}
       chrome={chrome}
-      overlays={overlays}
     />,
     element
   );
