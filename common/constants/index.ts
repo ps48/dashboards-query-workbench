@@ -31,6 +31,7 @@ export const ACCELERATION_TIME_INTERVAL = [
 ];
 
 export const ACCELERATION_ADD_FIELDS_TEXT = '(add fields here)';
+export const ACCELERATION_INDEX_NAME_REGEX = /^[a-z][a-z_\-]*$/;
 
 export const ACCELERATION_INDEX_NAME_INFO = `All OpenSearch acceleration indices have a naming format of pattern: \`prefix_<index name>_suffix\`. They share a common prefix structure, which is \`flint_<data source name>_<database name>_<table name>_\`. Additionally, they may have a suffix that varies based on the index type. 
 ##### Skipping Index
@@ -43,5 +44,5 @@ export const ACCELERATION_INDEX_NAME_INFO = `All OpenSearch acceleration indices
 - 'Materialized View' indices also enable users to define their index name, but they do not have a suffix.
   - An example of a 'Materialized View' index name might look like: \`flint_mydatasource_mydb_mytable_myindexname\`.
 ##### Note:
-- All user given index names must be in lowercase letters. Cannot begin with underscores or hyphens. Spaces, commas, and characters :, ", *, +, /, \, |, ?, #, >, or < are not allowed.  
+- All user given index names must be in lowercase letters. They cannot begin with underscores or hyphens. Spaces, commas, and characters :, ", *, +, /, \, |, ?, #, >, or < are not allowed.  
   `;

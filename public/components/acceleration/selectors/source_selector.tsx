@@ -11,8 +11,7 @@ import {
   EuiText,
   htmlIdGenerator,
 } from '@elastic/eui';
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateAccelerationForm } from '../../../../common/types';
 
 interface AccelerationDataSourceSelectorProps {
@@ -34,6 +33,7 @@ export const AccelerationDataSourceSelector = ({
   const [selectedTable, setSelectedTable] = useState<EuiComboBoxOptionOption<string>[]>([]);
 
   useEffect(() => {
+    // TODO: remove hardcoded responses
     setDataConnections([
       {
         label: 'spark1',
@@ -45,6 +45,7 @@ export const AccelerationDataSourceSelector = ({
   }, []);
 
   useEffect(() => {
+    // TODO: remove hardcoded responses
     if (accelerationFormData.dataSource !== '') {
       setDatabases([
         {
@@ -58,6 +59,7 @@ export const AccelerationDataSourceSelector = ({
   }, [accelerationFormData.dataSource]);
 
   useEffect(() => {
+    // TODO: remove hardcoded responses
     if (accelerationFormData.database !== '') {
       setTables([
         {
@@ -71,6 +73,7 @@ export const AccelerationDataSourceSelector = ({
   }, [accelerationFormData.database]);
 
   useEffect(() => {
+    // TODO: remove hardcoded responses
     if (accelerationFormData.dataTable !== '') {
       const idPrefix = htmlIdGenerator()();
       setAccelerationFormData({

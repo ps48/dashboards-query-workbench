@@ -3,15 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppMountParameters, CoreStart } from '../../../src/core/public';
-import { AppPluginStartDependencies } from './types';
 import { WorkbenchApp } from './components/app';
+import { AppPluginStartDependencies } from './types';
 
 export const renderApp = (
-  { notifications, http, chrome }: CoreStart,
+  { notifications, http, chrome, overlays }: CoreStart,
   { navigation }: AppPluginStartDependencies,
   { appBasePath, element }: AppMountParameters
 ) => {
@@ -22,6 +21,7 @@ export const renderApp = (
       http={http}
       navigation={navigation}
       chrome={chrome}
+      overlays={overlays}
     />,
     element
   );

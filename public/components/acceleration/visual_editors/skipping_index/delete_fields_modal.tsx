@@ -3,18 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
 import {
-  EuiTableFieldDataColumnType,
+  EuiButton,
+  EuiInMemoryTable,
   EuiModal,
+  EuiModalBody,
+  EuiModalFooter,
   EuiModalHeader,
   EuiModalHeaderTitle,
-  EuiModalBody,
-  EuiInMemoryTable,
-  EuiModalFooter,
-  EuiButton,
+  EuiTableFieldDataColumnType,
 } from '@elastic/eui';
 import _ from 'lodash';
+import React, { useState } from 'react';
 import { CreateAccelerationForm, SkippingIndexRowType } from '../../../../../common/types';
 
 interface AddFieldsModalProps {
@@ -30,7 +30,7 @@ export const DeleteFieldsModal = ({
 }: AddFieldsModalProps) => {
   const [selectedFields, setSelectedFields] = useState([]);
 
-  const tableColumns = [
+  const tableColumns: Array<EuiTableFieldDataColumnType<SkippingIndexRowType>> = [
     {
       field: 'fieldName',
       name: 'Field name',
@@ -49,7 +49,7 @@ export const DeleteFieldsModal = ({
       sortable: true,
       truncateText: true,
     },
-  ] as Array<EuiTableFieldDataColumnType<SkippingIndexRowType>>;
+  ];
 
   const pagination = {
     initialPageSize: 20,

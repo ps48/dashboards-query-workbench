@@ -3,30 +3,27 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ChangeEvent, useState } from 'react';
 import {
-  EuiPopover,
-  EuiButtonEmpty,
-  EuiPopoverTitle,
-  EuiPopoverFooter,
   EuiButton,
+  EuiButtonEmpty,
+  EuiComboBox,
+  EuiFieldText,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiFieldText,
   EuiFormRow,
-  EuiComboBox,
-  htmlIdGenerator,
+  EuiPopover,
+  EuiPopoverFooter,
+  EuiPopoverTitle,
   EuiSpacer,
+  htmlIdGenerator,
 } from '@elastic/eui';
-
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ACCELERATION_AGGREGRATION_FUNCTIONS } from '../../../../../common/constants';
 import {
   AggregationFunctionType,
   CreateAccelerationForm,
   MaterializedViewColumn,
 } from '../../../../../common/types';
-import { ACCELERATION_AGGREGRATION_FUNCTIONS } from '../../../../../common/constants';
-import { useEffect } from 'react';
-import _ from 'lodash';
 
 interface AddColumnPopOverProps {
   isColumnPopOverOpen: boolean;
@@ -60,10 +57,6 @@ export const AddColumnPopOver = ({
     setSelectedFunction([ACCELERATION_AGGREGRATION_FUNCTIONS[0]]);
     resetSelectedField();
     setSeletedAlias('');
-  };
-
-  const generateId = () => {
-    return htmlIdGenerator()();
   };
 
   const onChangeAlias = (e: ChangeEvent<HTMLInputElement>) => {
@@ -130,11 +123,10 @@ export const AddColumnPopOver = ({
           size="s"
           fill
           onClick={() => {
-            const newId = generateId();
             setColumnExpressionValues([
               ...columnExpressionValues,
               {
-                id: newId,
+                id: htmlIdGenerator()(),
                 functionName: selectedFunction[0].label as AggregationFunctionType,
                 functionParam: selectedField[0].label,
                 fieldAlias: selectedAlias,

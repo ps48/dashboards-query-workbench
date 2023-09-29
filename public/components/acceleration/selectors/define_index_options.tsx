@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ChangeEvent, useEffect, useState } from 'react';
 import {
   EuiButton,
   EuiFieldText,
@@ -20,11 +19,11 @@ import {
   EuiModalHeaderTitle,
   EuiSpacer,
   EuiText,
-  EuiHorizontalRule,
 } from '@elastic/eui';
+import React, { ChangeEvent, useState } from 'react';
+import { ACCELERATION_INDEX_NAME_INFO } from '../../../../common/constants';
 import { CreateAccelerationForm } from '../../../../common/types';
 import { validateIndexName } from '../create/utils';
-import { ACCELERATION_INDEX_NAME_INFO } from '../../../../common/constants';
 
 interface DefineIndexOptionsProps {
   accelerationFormData: CreateAccelerationForm;
@@ -69,12 +68,6 @@ export const DefineIndexOptions = ({
     setIndexName(e.target.value);
   };
 
-  useEffect(() => {
-    accelerationFormData.accelerationIndexType === 'skipping'
-      ? setIndexName('skipping')
-      : setIndexName('');
-  }, [accelerationFormData.accelerationIndexType]);
-
   const getPreprend = () => {
     const dataSource =
       accelerationFormData.dataSource !== ''
@@ -115,7 +108,7 @@ export const DefineIndexOptions = ({
       >
         <EuiFieldText
           placeholder="Enter index name"
-          value={indexName}
+          value={accelerationFormData.accelerationIndexType === 'skipping' ? 'skipping' : indexName}
           onChange={onChangeIndexName}
           aria-label="Enter Index Name"
           prepend={getPreprend()}

@@ -3,10 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
-import React from 'react';
 import { I18nProvider } from '@osd/i18n/react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from 'react';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 import { EuiPage, EuiPageBody } from '@elastic/eui';
 
@@ -21,26 +20,29 @@ interface WorkbenchAppDeps {
   http: CoreStart['http'];
   navigation: NavigationPublicPluginStart;
   chrome: CoreStart['chrome'];
+  overlays: CoreStart['overlays'];
 }
 
 const onChange = () => {};
 
-export const WorkbenchApp = ({ basename, notifications, http, navigation, chrome }: WorkbenchAppDeps) => {
+export const WorkbenchApp = ({
+  basename,
+  notifications,
+  http,
+  navigation,
+  chrome,
+}: WorkbenchAppDeps) => {
   return (
     <Router basename={'/' + basename}>
       <I18nProvider>
         <div>
           <EuiPage>
             <EuiPageBody>
-              <Route 
-                path="/" 
-                render={(props) => 
-                  <Main 
-                    httpClient={http} 
-                    {...props} 
-                    setBreadcrumbs={chrome.setBreadcrumbs} 
-                  />
-                } 
+              <Route
+                path="/"
+                render={(props) => (
+                  <Main httpClient={http} {...props} setBreadcrumbs={chrome.setBreadcrumbs} />
+                )}
               />
             </EuiPageBody>
           </EuiPage>

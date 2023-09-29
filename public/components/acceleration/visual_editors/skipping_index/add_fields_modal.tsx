@@ -4,18 +4,18 @@
  */
 
 import {
-  EuiModal,
-  EuiModalHeader,
-  EuiModalHeaderTitle,
-  EuiModalBody,
-  EuiModalFooter,
   EuiButton,
   EuiInMemoryTable,
+  EuiModal,
+  EuiModalBody,
+  EuiModalFooter,
+  EuiModalHeader,
+  EuiModalHeaderTitle,
   EuiTableFieldDataColumnType,
 } from '@elastic/eui';
+import _ from 'lodash';
 import React, { useState } from 'react';
 import { CreateAccelerationForm, DataTableFieldsType } from '../../../../../common/types';
-import _ from 'lodash';
 
 interface AddFieldsModalProps {
   setIsAddModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,7 +30,7 @@ export const AddFieldsModal = ({
 }: AddFieldsModalProps) => {
   const [selectedFields, setSelectedFields] = useState([]);
 
-  const tableColumns = [
+  const tableColumns: Array<EuiTableFieldDataColumnType<DataTableFieldsType>> = [
     {
       field: 'fieldName',
       name: 'Field name',
@@ -43,7 +43,7 @@ export const AddFieldsModal = ({
       sortable: true,
       truncateText: true,
     },
-  ] as Array<EuiTableFieldDataColumnType<DataTableFieldsType>>;
+  ];
 
   const pagination = {
     initialPageSize: 20,

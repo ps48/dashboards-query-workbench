@@ -5,19 +5,18 @@
 
 import {
   EuiComboBox,
+  EuiComboBoxOptionOption,
   EuiExpression,
+  EuiFlexGroup,
+  EuiFlexItem,
   EuiPopover,
   EuiPopoverTitle,
   EuiSpacer,
   EuiText,
-  EuiFlexItem,
-  EuiFlexGroup,
-  EuiComboBoxOptionOption,
 } from '@elastic/eui';
-import React, { useEffect, useState } from 'react';
-import { CreateAccelerationForm } from '../../../../../common/types';
-import _ from 'lodash';
+import React, { useState } from 'react';
 import { ACCELERATION_ADD_FIELDS_TEXT } from '../../../../../common/constants';
+import { CreateAccelerationForm } from '../../../../../common/types';
 
 interface CoveringIndexBuilderProps {
   accelerationFormData: CreateAccelerationForm;
@@ -68,7 +67,7 @@ export const CoveringIndexBuilder = ({
             value={`${accelerationFormData.dataSource}.${accelerationFormData.database}.${accelerationFormData.dataTable}`}
           />
           <EuiPopover
-            id="popover1"
+            id="coveringIndexFieldsPopOver"
             button={
               <EuiExpression
                 description=""
