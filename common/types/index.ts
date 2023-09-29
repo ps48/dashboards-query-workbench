@@ -39,8 +39,8 @@ export interface GroupByTumbleType {
 }
 
 export interface materializedViewQueryType {
-  ColumnsValues: MaterializedViewColumn[];
-  GroupByTumbleValue: GroupByTumbleType;
+  columnsValues: MaterializedViewColumn[];
+  groupByTumbleValue: GroupByTumbleType;
 }
 
 export interface CreateAccelerationForm {
@@ -50,7 +50,7 @@ export interface CreateAccelerationForm {
   dataTableFields: DataTableFieldsType[];
   accelerationIndexType: AccelerationIndexType;
   skippingIndexQueryData: SkippingIndexRowType[];
-  coveringIndexQueryData: string;
+  coveringIndexQueryData: string[];
   materializedViewQueryData: materializedViewQueryType;
   accelerationIndexName: string;
   primaryShardsCount: number;

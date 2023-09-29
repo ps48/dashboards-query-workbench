@@ -33,7 +33,7 @@ export const GroupByTumbleExpression = ({
   const [groupbyValues, setGroupByValues] = useState<GroupByTumbleType>({
     timeField: '',
     tumbleWindow: 1,
-    tumbleInterval: ACCELERATION_TIME_INTERVAL[0].text,
+    tumbleInterval: ACCELERATION_TIME_INTERVAL[0].value,
   });
 
   const onChangeTumbleWindow = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +54,7 @@ export const GroupByTumbleExpression = ({
       ...accelerationFormData,
       materializedViewQueryData: {
         ...accelerationFormData.materializedViewQueryData,
-        GroupByTumbleValue: groupbyValues,
+        groupByTumbleValue: groupbyValues,
       },
     });
   }, [groupbyValues]);
@@ -85,17 +85,9 @@ export const GroupByTumbleExpression = ({
               <EuiComboBox
                 placeholder="Select one or more options"
                 singleSelection={{ asPlainText: true }}
-                options={[
-                  ..._.reduce(
-                    accelerationFormData.dataTableFields,
-                    (dateFields, value) => {
-                      if (value.dataType.includes('TimestampType'))
-                        dateFields.push({ label: value.fieldName });
-                      return dateFields;
-                    },
-                    []
-                  ),
-                ]}
+                options={accelerationFormData.dataTableFields
+                  .filter((value) => value.dataType.includes('TimestampType'))
+                  .map((value) => ({ label: value.fieldName }))}
                 selectedOptions={[{ label: groupbyValues.timeField }]}
                 onChange={onChangeTimeField}
               />

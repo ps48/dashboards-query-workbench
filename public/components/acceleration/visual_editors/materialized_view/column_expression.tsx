@@ -101,9 +101,9 @@ export const ColumnExpression = ({
                           label: '*',
                           disabled: currentColumnExpressionValue.functionName !== 'count',
                         },
-                        ..._.map(accelerationFormData.dataTableFields, (x) => {
-                          return { label: x.fieldName };
-                        }),
+                        ...accelerationFormData.dataTableFields.map((x) => ({
+                          label: x.fieldName,
+                        })),
                       ]}
                       selectedOptions={[
                         {

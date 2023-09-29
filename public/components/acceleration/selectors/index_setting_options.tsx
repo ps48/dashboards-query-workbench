@@ -144,7 +144,6 @@ export const IndexSettingOptions = ({
           name="refresh type radio group"
         />
       </EuiFormRow>
-
       {refreshTypeSelected === intervalRefreshId && (
         <EuiFormRow
           label="Refresh interval"
@@ -166,26 +165,24 @@ export const IndexSettingOptions = ({
           />
         </EuiFormRow>
       )}
-      {refreshTypeSelected === autoRefreshId && (
-        <EuiFormRow
-          label={
-            accelerationFormData.accelerationIndexType === 'materialized'
-              ? 'Checkpoint location'
-              : 'Checkpoint location - optional'
+      <EuiFormRow
+        label={
+          accelerationFormData.accelerationIndexType === 'materialized'
+            ? 'Checkpoint location'
+            : 'Checkpoint location - optional'
+        }
+        helpText="The HDFS compatible file system location path for incremental refresh job checkpoint."
+      >
+        <EuiFieldText
+          placeholder="s3://checkpoint/location"
+          value={checkpoint}
+          onChange={onChangeCheckpoint}
+          aria-label="Use aria labels when no actual label is in use"
+          isInvalid={
+            accelerationFormData.accelerationIndexType === 'materialized' && checkpoint === ''
           }
-          helpText="The HDFS compatible file system location path for incremental refresh job checkpoint. Applicable when auto refresh is enabled."
-        >
-          <EuiFieldText
-            placeholder="s3://checkpoint/location"
-            value={checkpoint}
-            onChange={onChangeCheckpoint}
-            aria-label="Use aria labels when no actual label is in use"
-            isInvalid={
-              accelerationFormData.accelerationIndexType === 'materialized' && checkpoint === ''
-            }
-          />
-        </EuiFormRow>
-      )}
+        />
+      </EuiFormRow>
     </>
   );
 };

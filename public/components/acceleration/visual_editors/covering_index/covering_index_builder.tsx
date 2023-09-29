@@ -29,32 +29,21 @@ export const CoveringIndexBuilder = ({
   setAccelerationFormData,
 }: CoveringIndexBuilderProps) => {
   const [isPopOverOpen, setIsPopOverOpen] = useState(false);
-  const [columnsValue, setColumnsValue] = useState('');
-  const [selectedOptions, setSelected] = useState([]);
+  const [columnsValue, setColumnsValue] = useState(ACCELERATION_ADD_FIELDS_TEXT);
+  const [selectedOptions, setSelectedOptions] = useState<EuiComboBoxOptionOption[]>([]);
 
   const onChange = (selectedOptions: EuiComboBoxOptionOption[]) => {
-    setSelected(selectedOptions);
-  };
-
-  useEffect(() => {
-    let expresseionValue = ACCELERATION_ADD_FIELDS_TEXT;
+    let expressionValue = ACCELERATION_ADD_FIELDS_TEXT;
     if (selectedOptions.length > 0) {
-      expresseionValue =
-        '(' +
-        _.reduce(
-          selectedOptions,
-          function (columns, n, index) {
-            const columnValue = columns + `${n.label}`;
-            if (index !== selectedOptions.length - 1) return `${columnValue}, `;
-            else return columnValue;
-          },
-          ''
-        ) +
-        ')';
+      expressionValue = `(${selectedOptions.map((option) => option.label).join(', ')})`;
     }
-    setAccelerationFormData({ ...accelerationFormData, coveringIndexQueryData: expresseionValue });
-    setColumnsValue(expresseionValue);
-  }, [selectedOptions]);
+    setAccelerationFormData({
+      ...accelerationFormData,
+      coveringIndexQueryData: selectedOptions.map((option) => option.label),
+    });
+    setColumnsValue(expressionValue);
+    setSelectedOptions(selectedOptions);
+  };
 
   return (
     <>
@@ -75,6 +64,7 @@ export const CoveringIndexBuilder = ({
         <EuiFlexItem>
           <EuiExpression
             description="ON"
+            color="accent"
             value={`${accelerationFormData.dataSource}.${accelerationFormData.database}.${accelerationFormData.dataTable}`}
           />
           <EuiPopover
@@ -97,9 +87,7 @@ export const CoveringIndexBuilder = ({
               <EuiPopoverTitle paddingSize="l">Columns</EuiPopoverTitle>
               <EuiComboBox
                 placeholder="Select one or more options"
-                options={accelerationFormData.dataTableFields.map((x) => {
-                  return { label: x.fieldName };
-                })}
+                options={accelerationFormData.dataTableFields.map((x) => ({ label: x.fieldName }))}
                 selectedOptions={selectedOptions}
                 onChange={onChange}
               />

@@ -49,9 +49,8 @@ export const DefineIndexOptions = ({
           </EuiModalHeaderTitle>
         </EuiModalHeader>
         <EuiModalBody>
-          <EuiHorizontalRule size="full" margin="s" />
           <EuiFlexGroup>
-            <EuiFlexItem>
+            <EuiFlexItem grow={false}>
               <EuiMarkdownFormat>{ACCELERATION_INDEX_NAME_INFO}</EuiMarkdownFormat>
             </EuiFlexItem>
           </EuiFlexGroup>

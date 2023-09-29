@@ -51,7 +51,7 @@ export const MaterializedViewBuilder = ({
       ...accelerationFormData,
       materializedViewQueryData: {
         ...accelerationFormData.materializedViewQueryData,
-        ColumnsValues: columnExpressionValues,
+        columnsValues: columnExpressionValues,
       },
     });
   }, [columnExpressionValues]);
@@ -64,11 +64,16 @@ export const MaterializedViewBuilder = ({
       <EuiSpacer size="s" />
       <EuiExpression
         description="CREATE MATERIALIZED VIEW"
-        value={accelerationFormData.accelerationIndexName}
+        value={`${accelerationFormData.dataSource}.${accelerationFormData.database}.${accelerationFormData.accelerationIndexName}`}
       />
+
+      <EuiFlexItem grow={false}>
+        <EuiExpression description="[IF NOT EXISTS]" value="" />
+      </EuiFlexItem>
+
       <EuiFlexGroup>
         <EuiFlexItem grow={false}>
-          <EuiExpression description="AS SELECT" value="" />
+          <EuiExpression color="accent" description="AS SELECT" value="" />
         </EuiFlexItem>
         <EuiFlexItem grow={false}>
           <AddColumnPopOver
@@ -94,7 +99,10 @@ export const MaterializedViewBuilder = ({
         })}
       </EuiFlexGroup>
       <EuiSpacer size="s" />
-      <EuiExpression color="accent" description="FROM" value={accelerationFormData.dataTable} />
+      <EuiExpression
+        description="FROM"
+        value={`${accelerationFormData.dataSource}.${accelerationFormData.database}.${accelerationFormData.dataTable}`}
+      />
       <EuiSpacer size="s" />
       <GroupByTumbleExpression
         accelerationFormData={accelerationFormData}

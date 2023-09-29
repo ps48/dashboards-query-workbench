@@ -23,6 +23,7 @@ import { QueryVisualEditor } from '../visual_editors/query_visual_editor';
 import { accelerationQueryBuilder } from '../visual_editors/query_builder';
 import { IndexSettingOptions } from '../selectors/index_setting_options';
 import { DefineIndexOptions } from '../selectors/define_index_options';
+import { ACCELERATION_TIME_INTERVAL } from '../../../../common/constants';
 
 export interface CreateAccelerationProps {
   dataSource: string;
@@ -42,14 +43,17 @@ export const CreateAcceleration = ({
     dataTableFields: [],
     accelerationIndexType: 'skipping',
     skippingIndexQueryData: [],
-    coveringIndexQueryData: '',
+    coveringIndexQueryData: [],
     materializedViewQueryData: {} as materializedViewQueryType,
     accelerationIndexName: '',
     primaryShardsCount: 5,
     replicaShardsCount: 1,
     refreshType: 'auto',
     checkpointLocation: undefined,
-    refreshIntervalOptions: undefined,
+    refreshIntervalOptions: {
+      refreshWindow: 1,
+      refreshInterval: ACCELERATION_TIME_INTERVAL[1].value,
+    },
   });
 
   const copyToEditor = () => {

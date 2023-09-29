@@ -112,9 +112,7 @@ export const AddColumnPopOver = ({
                 singleSelection={{ asPlainText: true }}
                 options={[
                   { label: '*', disabled: selectedFunction[0].label !== 'count' },
-                  ..._.map(accelerationFormData.dataTableFields, (x) => {
-                    return { label: x.fieldName };
-                  }),
+                  ...accelerationFormData.dataTableFields.map((x) => ({ label: x.fieldName })),
                 ]}
                 selectedOptions={selectedField}
                 onChange={setSelectedField}

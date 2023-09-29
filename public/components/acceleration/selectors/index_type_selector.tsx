@@ -4,14 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import {
-  EuiComboBox,
-  EuiComboBoxOptionOption,
-  EuiFormRow,
-  EuiLink,
-  EuiSpacer,
-  EuiText,
-} from '@elastic/eui';
+import { EuiComboBox, EuiComboBoxOptionOption, EuiFormRow, EuiLink, EuiText } from '@elastic/eui';
 import {
   ACCELERATION_INDEX_TYPES,
   ACC_INDEX_TYPE_DOCUMENTATION_URL,
