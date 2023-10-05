@@ -202,7 +202,8 @@ export const skippingIndexBuilderMock1: CreateAccelerationForm = {
 };
 
 export const skippingIndexBuilderMockResult1 = `CREATE SKIPPING INDEX
-ON datasource.database.table (
+ON datasource.database.table
+  FOR COLUMNS (
    field1 PARTITION, 
    field2 VALUE_SET, 
    field3 MIN_MAX
@@ -233,7 +234,8 @@ export const skippingIndexBuilderMock2: CreateAccelerationForm = {
 };
 
 export const skippingIndexBuilderMockResult2 = `CREATE SKIPPING INDEX
-ON datasource.database.table (
+ON datasource.database.table
+  FOR COLUMNS (
    field1 PARTITION
   ) WITH (
 index_settings = '{"number_of_shards":5,"number_of_replicas":3}',
@@ -259,7 +261,8 @@ export const coveringIndexBuilderMock1: CreateAccelerationForm = {
 };
 
 export const coveringIndexBuilderMockResult1 = `CREATE INDEX index_name
-ON datasource.database.table (
+ON datasource.database.table
+  FOR COLUMNS (
    field1, 
    field2, 
    field3
@@ -284,7 +287,8 @@ export const coveringIndexBuilderMock2: CreateAccelerationForm = {
 };
 
 export const coveringIndexBuilderMockResult2 = `CREATE INDEX index_name
-ON datasource.database.table (
+ON datasource.database.table
+  FOR COLUMNS (
    field1
   ) WITH (
 index_settings = '{"number_of_shards":5,"number_of_replicas":3}',

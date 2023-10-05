@@ -14,7 +14,7 @@ import {
   EuiPageSideBar,
   EuiPanel,
   EuiSpacer,
-  EuiText,
+  EuiText
 } from '@elastic/eui';
 import { IHttpResponse } from 'angular';
 import _ from 'lodash';
@@ -790,9 +790,6 @@ export class Main extends React.Component<MainProps, MainState> {
   }
 
   handleDataSelect = (selectedItems: []) => {
-    if (selectedItems[0].label !== 'OpenSearch' && this.state.language === 'SQL') {
-      this.updateSQLQueries('');
-    }
     this.setState({
       selectedDatasource: selectedItems,
     });
@@ -915,11 +912,13 @@ export class Main extends React.Component<MainProps, MainState> {
         <EuiPage paddingSize="none">
           {this.state.language === 'SQL' && (
             <EuiPanel>
-              <EuiPageSideBar style={{ maxWidth: '400px', width: '400px' }}>
+              <EuiPageSideBar>
                 <EuiFlexGroup direction="column">
                   <EuiFlexItem>
                     <EuiFlexItem grow={false}>
-                      <CreateButton updateSQLQueries={this.updateSQLQueries} />
+                      <CreateButton
+                        updateSQLQueries={this.updateSQLQueries}
+                      />
                     </EuiFlexItem>
                     <EuiSpacer />
                     <TableView

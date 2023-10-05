@@ -52,13 +52,11 @@ export const IndexTypeSelector = ({
       };
       getJobId(query, http, (id: string) => {
         pollQueryStatus(id, http, (data: any[]) => {
-          const dataTableFields: DataTableFieldsType[] = data
-            .filter((row) => !row[0].startsWith('#'))
-            .map((row, index) => ({
-              id: `${idPrefix}${index + 1}`,
-              fieldName: row[0],
-              dataType: row[1],
-            }));
+          const dataTableFields: DataTableFieldsType[] = data.map((field, index) => ({
+            id: `${idPrefix}${index + 1}`,
+            fieldName: field.col_name,
+            dataType: field.data_type,
+          }));
           setAccelerationFormData({
             ...accelerationFormData,
             dataTableFields: dataTableFields,

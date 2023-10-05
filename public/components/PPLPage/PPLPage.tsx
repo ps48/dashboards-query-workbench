@@ -3,24 +3,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import React from 'react';
 import {
+  EuiPanel,
   EuiButton,
-  EuiCodeBlock,
-  EuiCodeEditor,
   EuiFlexGroup,
   EuiFlexItem,
+  EuiText,
+  EuiCodeEditor,
+  EuiSpacer,
+  EuiCodeBlock,
   EuiModal,
   EuiModalBody,
   EuiModalFooter,
   EuiModalHeader,
   EuiModalHeaderTitle,
   EuiOverlayMask,
-  EuiPanel,
-  EuiSpacer,
-  EuiText,
 } from '@elastic/eui';
-import React from 'react';
 import { ResponseDetail, TranslateResult } from '../Main/main';
+import _ from 'lodash';
 
 interface PPLPageProps {
   onRun: (query: string) => void;
@@ -106,7 +107,7 @@ export class PPLPage extends React.Component<PPLPageProps, PPLPageState> {
         <EuiCodeEditor
           theme="sql_console"
           width="100%"
-          height="7rem"
+          height="5rem"
           value={this.props.pplQuery}
           onChange={this.props.updatePPLQueries}
           showPrintMargin={false}

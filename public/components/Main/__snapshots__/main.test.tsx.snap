@@ -193,7 +193,6 @@ exports[`<Main /> spec click clear button 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -753,7 +752,6 @@ exports[`<Main /> spec click run button, and response causes an error 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -1313,7 +1311,6 @@ exports[`<Main /> spec click run button, and response is not ok 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -1873,7 +1870,6 @@ exports[`<Main /> spec click run button, and response is ok 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -1978,15 +1974,7 @@ exports[`<Main /> spec click run button, and response is ok 1`] = `
                           class="euiTreeView__nodeLabel"
                         >
                           <div>
-                            <span
-                              class="euiToolTipAnchor"
-                            >
-                              <div
-                                class="euiText euiText--medium"
-                              >
-                                2
-                              </div>
-                            </span>
+                            2
                              
                           </div>
                         </span>
@@ -2027,15 +2015,7 @@ exports[`<Main /> spec click run button, and response is ok 1`] = `
                           class="euiTreeView__nodeLabel"
                         >
                           <div>
-                            <span
-                              class="euiToolTipAnchor"
-                            >
-                              <div
-                                class="euiText euiText--medium"
-                              >
-                                2
-                              </div>
-                            </span>
+                            2
                              
                           </div>
                         </span>
@@ -2521,7 +2501,6 @@ exports[`<Main /> spec click run button, response fills null and missing values 
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -2626,13 +2605,6 @@ exports[`<Main /> spec click run button, response fills null and missing values 
                           class="euiTreeView__nodeLabel"
                         >
                           <div>
-                            <span
-                              class="euiToolTipAnchor"
-                            >
-                              <div
-                                class="euiText euiText--medium"
-                              />
-                            </span>
                              
                           </div>
                         </span>
@@ -2673,13 +2645,6 @@ exports[`<Main /> spec click run button, response fills null and missing values 
                           class="euiTreeView__nodeLabel"
                         >
                           <div>
-                            <span
-                              class="euiToolTipAnchor"
-                            >
-                              <div
-                                class="euiText euiText--medium"
-                              />
-                            </span>
                              
                           </div>
                         </span>
@@ -3168,7 +3133,6 @@ exports[`<Main /> spec click translation button, and response is ok 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -3719,7 +3683,6 @@ exports[`<Main /> spec renders the component 1`] = `
     >
       <div
         class="euiPageSideBar"
-        style="max-width: 400px; width: 400px;"
       >
         <div
           class="euiFlexGroup euiFlexGroup--gutterLarge euiFlexGroup--directionColumn euiFlexGroup--responsive"
@@ -3815,15 +3778,7 @@ exports[`<Main /> spec renders the component 1`] = `
                           class="euiTreeView__nodeLabel"
                         >
                           <div>
-                            <span
-                              class="euiToolTipAnchor"
-                            >
-                              <div
-                                class="euiText euiText--medium"
-                              >
-                                .kibana_1
-                              </div>
-                            </span>
+                            .kibana_1
                              
                           </div>
                         </span>
