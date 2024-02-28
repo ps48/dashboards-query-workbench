@@ -6,6 +6,7 @@
 import { AppMountParameters, CoreSetup, CoreStart, Plugin } from '../../../src/core/public';
 import { PLUGIN_NAME } from '../common/constants';
 import { coreRefs } from './framework/core_refs';
+import { interceptError } from './glue_catalog_cache/intercept_utils';
 import { AppPluginStartDependencies, WorkbenchPluginSetup, WorkbenchPluginStart } from './types';
 
 export class WorkbenchPlugin implements Plugin<WorkbenchPluginSetup, WorkbenchPluginStart> {
@@ -41,6 +42,10 @@ export class WorkbenchPlugin implements Plugin<WorkbenchPluginSetup, WorkbenchPl
     coreRefs.chrome = core.chrome;
     coreRefs.application = core.application;
     coreRefs.overlays = core.overlays;
+
+    core.http.intercept({
+      responseError: interceptError(),
+    });
 
     return {};
   }
