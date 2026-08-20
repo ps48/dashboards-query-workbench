@@ -13,8 +13,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Chen Dai                | [dai-chen](https://github.com/dai-chen)         | Amazon      |
 | Vamsi Manohar           | [vamsimanohar](https://github.com/vamsimanohar) | Amazon      |
 | Peng Huo                | [penghuo](https://github.com/penghuo)           | Amazon      |
-| Sean Kao                | [seankao-az](https://github.com/seankao-az)     | Amazon      |
-| Max Ksyunz              | [MaxKsyunz](https://github.com/MaxKsyunz)       | BitQuill    |
 | Anirudha Jadhav         | [anirudha](https://github.com/anirudha)         | Amazon      |
 | Sumukh Hanumantha Swamy | [sumukhswamy](https://github.com/sumukhswamy)   | Amazon      |
 | Jialiang Liang          | [RyanL1997](https://github.com/RyanL1997)       | Amazon      |
@@ -36,3 +34,5 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 | Rupal Mahajan     | [rupal-bq](https://github.com/rupal-bq)             | Amazon      |
 | Yury Fridlyand    | [Yury-Fridlyand](https://github.com/Yury-Fridlyand) | BitQuill    |
 | Paul Sebastian    | [paulstn](https://github.com/paulstn)               | Amazon      |
+| Max Ksyunz        | [MaxKsyunz](https://github.com/MaxKsyunz)           | BitQuill    |
+| Sean Kao          | [seankao-az](https://github.com/seankao-az)         | Amazon      |
